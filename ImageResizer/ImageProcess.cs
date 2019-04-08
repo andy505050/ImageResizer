@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -43,7 +44,7 @@ namespace ImageResizer
         {
             var allFiles = FindImages(sourcePath);
             List<Task> taskList = new List<Task>();
-            foreach (var filePath in allFiles)
+            foreach (var filePath in allFiles.AsParallel())
             {
                 var task = Task.Run(() =>
                 {
